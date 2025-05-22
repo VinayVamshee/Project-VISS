@@ -11,6 +11,15 @@ export default function Home() {
     const [userLoginData, setUserLoginData] = useState({ name: '', password: '' });
     const navigate = useNavigate();
 
+    // eslint-disable-next-line 
+    const [theme, setTheme] = useState("light");
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        setTheme(savedTheme);
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    }, []);
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         const adminData = localStorage.getItem("admin");
