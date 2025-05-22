@@ -17,7 +17,12 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const connectDB = () => {
     console.log("DataBase Connected");
-    return mongoose.connect(uri);
+    return mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 10000, 
+});
+
 };
 
 const app = express();
