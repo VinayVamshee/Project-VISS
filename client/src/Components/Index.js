@@ -1571,13 +1571,7 @@ export default function Index() {
                       : item.link;
 
                     return (
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "5px",
-                        }}
-                      >
+                      <div style={{ display: "flex", flexDirection: "column", gap: "5px" }} >
                         <a
                           href={link}
                           target="_blank"
@@ -1643,6 +1637,7 @@ export default function Index() {
                   id="ItemEditModal"
                   tabIndex="-1"
                   aria-hidden="true"
+                  data-bs-backdrop='false'
                 >
                   <div className="modal-dialog">
                     <div className="modal-content">
