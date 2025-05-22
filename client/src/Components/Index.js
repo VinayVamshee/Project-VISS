@@ -78,7 +78,7 @@ export default function Index() {
   // Login handler
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://localhost:3001/admin-login", {
+      const res = await axios.post("https://viss-server.vercel.app/admin-login", {
         username: loginForm.username,
         password: loginForm.password,
       });
@@ -102,7 +102,7 @@ export default function Index() {
   const handleRegister = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:3001/admin-register",
+        "https://viss-server.vercel.app/admin-register",
         registerForm
       );
       alert(res.data.message);
@@ -115,7 +115,7 @@ export default function Index() {
   const handleUpdate = async () => {
     try {
       const res = await axios.put(
-        "http://localhost:3001/admin-details-update",
+        "https://viss-server.vercel.app/admin-details-update",
         updateForm
       );
       alert(res.data.message);
@@ -152,7 +152,7 @@ export default function Index() {
 
   const handleAddCategory = async () => {
     try {
-      await axios.post("http://localhost:3001/add-category", categoryForm);
+      await axios.post("https://viss-server.vercel.app/add-category", categoryForm);
       alert("Category added successfully");
       fetchAllData();
       setCategoryForm({ sNo: "", name: "" });
@@ -164,7 +164,7 @@ export default function Index() {
   const handleAddSubCategory = async () => {
     try {
       await axios.post(
-        "http://localhost:3001/add-subcategory",
+        "https://viss-server.vercel.app/add-subcategory",
         subCategoryForm
       );
       alert("SubCategory added successfully");
@@ -177,7 +177,7 @@ export default function Index() {
 
   const handleAddItem = async () => {
     try {
-      await axios.post("http://localhost:3001/add-item", itemForm);
+      await axios.post("https://viss-server.vercel.app/add-item", itemForm);
       alert("Item added successfully");
       fetchAllData();
       setItemForm({
@@ -202,9 +202,9 @@ export default function Index() {
     try {
       setLoading(true);
       const [catRes, subCatRes, itemRes] = await Promise.all([
-        axios.get("http://localhost:3001/categories"),
-        axios.get("http://localhost:3001/subcategories"),
-        axios.get("http://localhost:3001/items"),
+        axios.get("https://viss-server.vercel.app/categories"),
+        axios.get("https://viss-server.vercel.app/subcategories"),
+        axios.get("https://viss-server.vercel.app/items"),
       ]);
 
       setCategories(catRes.data);
@@ -252,7 +252,7 @@ export default function Index() {
   // Login function
   const userLogin = async () => {
     try {
-      const res = await axios.post("http://localhost:3001/user-login", {
+      const res = await axios.post("https://viss-server.vercel.app/user-login", {
         username: userLoginData.name,
         password: userLoginData.password,
       });
@@ -285,7 +285,7 @@ export default function Index() {
 
   const userRegister = async () => {
     try {
-      await axios.post("http://localhost:3001/user-register", {
+      await axios.post("https://viss-server.vercel.app/user-register", {
         username: userRegisterData.name,
         password: userRegisterData.password,
         category: userRegisterData.category, // send the array directly
@@ -302,7 +302,7 @@ export default function Index() {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/users");
+      const res = await axios.get("https://viss-server.vercel.app/users");
       setUsers(res.data);
     } catch (err) {
       console.error("Failed to load users", err);
@@ -684,7 +684,7 @@ export default function Index() {
                               onClick={async () => {
                                 if (window.confirm("Delete user?")) {
                                   await axios.delete(
-                                    `http://localhost:3001/user-delete/${user._id}`
+                                    `https://viss-server.vercel.app/user-delete/${user._id}`
                                   );
                                   setUsers(
                                     users.filter((u) => u._id !== user._id)
@@ -776,7 +776,7 @@ export default function Index() {
                         className="btn btn-success"
                         onClick={async () => {
                           await axios.put(
-                            `http://localhost:3001/user-update/${selectedUser._id}`,
+                            `https://viss-server.vercel.app/user-update/${selectedUser._id}`,
                             {
                               username: editUsername,
                               password: editPassword,
@@ -1467,7 +1467,7 @@ export default function Index() {
                         if (newName && newSNo) {
                           try {
                             await axios.put(
-                              `http://localhost:3001/update-subcategory/${sub._id}`,
+                              `https://viss-server.vercel.app/update-subcategory/${sub._id}`,
                               {
                                 name: newName,
                                 sNo: Number(newSNo),
@@ -1495,7 +1495,7 @@ export default function Index() {
                         ) {
                           try {
                             await axios.delete(
-                              `http://localhost:3001/delete-subcategory/${sub._id}`
+                              `https://viss-server.vercel.app/delete-subcategory/${sub._id}`
                             );
                             alert("SubCategory deleted");
                             fetchAllData();
@@ -1567,7 +1567,7 @@ export default function Index() {
                                 if (confirmDelete) {
                                   try {
                                     const res = await axios.delete(
-                                      `http://localhost:3001/delete-item/${item._id}`
+                                      `https://viss-server.vercel.app/delete-item/${item._id}`
                                     );
                                     if (res.status === 200) {
                                       fetchAllData();
@@ -1667,7 +1667,7 @@ export default function Index() {
                           onClick={async () => {
                             try {
                               const res = await axios.put(
-                                `http://localhost:3001/update-item/${selectedItem._id}`,
+                                `https://viss-server.vercel.app/update-item/${selectedItem._id}`,
                                 {
                                   ...editForm,
                                   category: selectedItem.category,
