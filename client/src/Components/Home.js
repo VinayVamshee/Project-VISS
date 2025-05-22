@@ -37,7 +37,7 @@ export default function Home() {
 
     const handleAdminLogin = async () => {
         try {
-            const res = await axios.post("http://localhost:3001/admin-login", {
+            const res = await axios.post("https://viss-server.vercel.app/admin-login", {
                 username: loginForm.username,
                 password: loginForm.password,
             });
@@ -59,7 +59,7 @@ export default function Home() {
 
     const handleUserLogin = async () => {
         try {
-            const res = await axios.post("http://localhost:3001/user-login", {
+            const res = await axios.post("https://viss-server.vercel.app/user-login", {
                 username: userLoginData.name,
                 password: userLoginData.password,
             });
