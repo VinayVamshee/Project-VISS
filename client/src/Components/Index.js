@@ -1407,14 +1407,64 @@ export default function Index() {
         )
           .sort((a, b) => a.sNo - b.sNo)
           .map((cat) => (
-            <div className="category" key={cat._id}>
-              <button
-                className={`btn btn-sm ${filterType === cat._id ? "active" : ""
-                  }`}
-                onClick={() => handleFilterClick(cat._id)}
-              >
-                {cat.name}
-              </button>
+            <div key={cat._id} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              <div className="category">
+                <button
+                  className={`btn btn-sm ${filterType === cat._id ? "active" : ""}`}
+                  onClick={() => handleFilterClick(cat._id)}
+                >
+                  {cat.name}
+                </button>
+              </div>
+              {
+                loggedInAdmin && ActivateEditMode ? (
+                  <div style={{display:'flex',gap:'10px'}}>
+                    <button
+                      className="btn btn-sm btn-info"
+                      style={{ width: "fit-content" }}
+                      onClick={async () => {
+                        const newName = prompt("Enter new name:", cat.name);
+                        const newSNo = prompt("Enter new serial number:", cat.sNo);
+                        if (newName && newSNo) {
+                          try {
+                            await axios.put(`https://viss-server.vercel.app/update-category/${cat._id}`, {
+                              name: newName,
+                              sNo: Number(newSNo),
+                            });
+                            alert("Category updated.");
+                            fetchAllData();
+                          } catch (err) {
+                            alert("Update failed.");
+                          }
+                        }
+                      }}
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      className="btn btn-sm btn-danger"
+                      style={{ width: "fit-content" }}
+                      onClick={async () => {
+                        if (window.confirm("Are you sure you want to delete this category?")) {
+                          try {
+                            await axios.delete(`https://viss-server.vercel.app/delete-category/${cat._id}`);
+                            alert("Category deleted.");
+                            fetchAllData();
+                          } catch (err) {
+                            alert("Delete failed.");
+                          }
+                        }
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )
+                :
+                null
+              }
+
             </div>
           ))}
       </div>
