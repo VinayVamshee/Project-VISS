@@ -1408,17 +1408,25 @@ export default function Index() {
           .sort((a, b) => a.sNo - b.sNo)
           .map((cat) => (
             <div key={cat._id} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              <div className="category">
-                <button
-                  className={`btn btn-sm ${filterType === cat._id ? "active" : ""}`}
-                  onClick={() => handleFilterClick(cat._id)}
-                >
-                  {cat.name}
-                </button>
+              <div className="category d-inline-flex align-items-center gap-1">
+                <button className={`btn btn-sm ${filterType === cat._id ? "active" : ""}`} onClick={() => handleFilterClick(cat._id)} > {cat.name} </button>
+                <div class={`dropdown btn btn-sm  ${filterType === cat._id ? "active" : ""}`}>
+                  <button class={`btn btn-sm  ${filterType === cat._id ? "active" : ""}`} style={{ padding:'3px'}} type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-caret-down"></i></button>
+                  <ul class="dropdown-menu">
+                    {
+                      subCategories.filter((sub) => sub.category === cat._id)
+                        .sort((a, b) => a.sNo - b.sNo).map((element) => {
+                          return (
+                            <a href={`#sub-${element._id}`}className="dropdown-item">{element.name}</a>
+                          )
+                        })
+                    }
+                  </ul>
+                </div>
               </div>
               {
                 loggedInAdmin && ActivateEditMode ? (
-                  <div style={{display:'flex',gap:'10px'}}>
+                  <div style={{ display: 'flex', gap: '10px' }}>
                     <button
                       className="btn btn-sm btn-info"
                       style={{ width: "fit-content" }}
@@ -1461,8 +1469,8 @@ export default function Index() {
                     </button>
                   </div>
                 )
-                :
-                null
+                  :
+                  null
               }
 
             </div>
@@ -1498,7 +1506,7 @@ export default function Index() {
           .filter((sub) => sub.category === filterType)
           .sort((a, b) => a.sNo - b.sNo)
           .map((sub) => (
-            <div className="sub-categories" key={sub._id}>
+            <div className="sub-categories" id={`sub-${sub._id}`} key={sub._id}>
               <p className="sub-category-name">
                 {sub.name}
                 {loggedInAdmin && ActivateEditMode ? (
@@ -1580,7 +1588,7 @@ export default function Index() {
                           key={item._id}
                         >
                           <img src={item.iconUrl} alt={item.name} />
-                          <div>{item.name}</div>
+                          <div className="item-name">{item.name}</div>
                         </a>
                         {loggedInAdmin && ActivateEditMode ? (
                           <div style={{ display: "flex", gap: "5px" }}>
