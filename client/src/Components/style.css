@@ -554,12 +554,22 @@
 
 /* Active category button style */
 .Categories .btn.active,
-.Categories .btn:active {
+.Categories .btn:active{
     background-color: var(--category-btn-active-bg);
     color: white;
     border-color: var(--category-btn-active-bg);
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.604);
 
+}
+
+.Categories .category {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Categories .category .dropdown {
+    padding: 0px;
 }
 
 .all-items {
@@ -585,7 +595,7 @@
     margin-bottom: 20px;
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.395);
 
-    width: 32%;
+    width: 48.5%;
     height: fit-content;
 
     display: flex;
@@ -604,7 +614,7 @@
 .items {
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     width: 100%;
 }
 
@@ -624,22 +634,25 @@
     transition: 0.3s ease-in-out;
 }
 
+.item-name {
+
+    color: blue;
+    transition: 0.3s ease-in-out;
+}
+
 
 .item:hover {
     background-color: var(--item-hover-bg);
     filter: drop-shadow(3px 3px 7px rgba(0, 0, 0, 0.393));
-    transform: scale(1.02);
+    transform: scale(1.08);
 }
 
 .item img {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     object-fit: cover;
     border-radius: 20px;
 }
-
-
-
 
 .flipbook-container {
     padding: 50px;
