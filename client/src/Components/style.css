@@ -450,10 +450,6 @@
 
     padding: 10px;
     width: 100%;
-
-    position: sticky;
-    top: 0;
-    z-index: 100;
 }
 
 .navigation form {
@@ -516,25 +512,51 @@
 .modal {
     background-color: var(--modal-bg);
 }
-
 .Categories {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
+    overflow-x: scroll;
+    overflow-y: visible;
+    white-space: nowrap;
     gap: 10px;
 
     padding: 10px;
     background-color: var(--categories-bg);
-
     width: 95%;
     border-radius: 10px;
-
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.395);
-    position: sticky;
-    top: auto;
+
+    scrollbar-width:auto; 
 }
 
-.Categories .btn {
+.list-group-item:hover {
+    background-color: gainsboro;
+    color: black;
+}
+
+.Categories::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+    background-color: rgba(129, 129, 129, 0.1); /* Background of scrollbar track */
+}
+
+.Categories::-webkit-scrollbar-track {
+    background-color: rgba(129, 129, 129, 0.1); /* Track background */
+    border-radius: 10px;
+}
+
+.Categories::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.6); /* Scroll thumb */
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Optional border for contrast */
+}
+
+.Categories::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+
+.Categories .category .btn {
     background-color: var(--category-btn-bg);
     color: var(--category-btn-text);
     padding: 8px 14px;
@@ -543,18 +565,18 @@
     transition: background-color 0.3s ease;
     transition: 0.2s ease-in-out;
     font-weight: bold;
+    height: 36px;
 }
 
 /* Hover effect on category buttons */
-.Categories .btn:hover {
+.Categories .category .btn:hover {
     background-color: var(--category-btn-hover-bg);
     box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.431);
     transform: scale(1.05);
 }
 
 /* Active category button style */
-.Categories .btn.active,
-.Categories .btn:active{
+.Categories .category .btn.active{
     background-color: var(--category-btn-active-bg);
     color: white;
     border-color: var(--category-btn-active-bg);
@@ -565,12 +587,17 @@
 .Categories .category {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 2px;
+    white-space: nowrap;
 }
 
-.Categories .category .dropdown {
+/* .Categories .category .dropdown {
     padding: 0px;
 }
+
+.Categories .category .dropdown .dropdown-menu{
+    z-index: 1000;
+} */
 
 .all-items {
     width: 95%;
@@ -1033,3 +1060,16 @@
     flex-wrap: wrap;
     gap: 10px;
 }
+
+@media (max-width: 1176px) {
+  .Categories {
+   white-space: nowrap;
+   overflow-x: scroll;
+   overflow-y: visible;
+    gap: 10px;
+    padding: 5px 10px;
+    width: 98%;
+  }
+}
+
+
