@@ -331,6 +331,8 @@ export default function Index() {
     iconUrl: "",
     link: "",
     document: false,
+    category: "",
+    subCategory: ""
   });
   const [searchText, setSearchText] = useState('');
 
@@ -348,30 +350,13 @@ export default function Index() {
     <div className="index">
       <div className="navigation">
         <Link to='/' className="logo">VISS</Link>
-        <form autoComplete="off">
-          <input
-            type="text"
-            placeholder="Search"
-            name="searchText"
-            autoComplete="new-password"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            className="form-control"
-          />
-        </form>
+        <form autoComplete="off"><input type="text" placeholder="Search" name="searchText" autoComplete="new-password" value={searchText} onChange={(e) => setSearchText(e.target.value)} className="form-control" />  </form>
 
         <div className="controls">
           {loggedInAdmin ? (
             <div className="dropdown">
-              <button
-                className="btn btn-sm dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+              <button className="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" ><i className="fa-solid fa-pen-nib fa-lg me-2"></i>Modify </button>
 
-                <i className="fa-solid fa-pen-nib fa-lg me-2"></i>Modify
-              </button>
               <ul className="dropdown-menu">
                 <li>
                   <div className="form-check ms-3">
@@ -389,39 +374,9 @@ export default function Index() {
                     </label>
                   </div>
                 </li>
-                <li>
-
-                  <button
-                    className="dropdown-item"
-                    data-bs-toggle="modal"
-                    data-bs-target="#AddCategoryModal"
-                  >
-
-                    Add Category
-                  </button>
-                </li>
-                <li>
-
-                  <button
-                    className="dropdown-item"
-                    data-bs-toggle="modal"
-                    data-bs-target="#AddSubCategoryModal"
-                  >
-
-                    Add SubCategory
-                  </button>
-                </li>
-                <li>
-
-                  <button
-                    className="dropdown-item"
-                    data-bs-toggle="modal"
-                    data-bs-target="#AddItemModal"
-                  >
-
-                    Add Item
-                  </button>
-                </li>
+                <li> <button className="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddCategoryModal" >Add Category </button> </li>
+                <li> <button className="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddSubCategoryModal" > Add SubCategory </button> </li>
+                <li> <button className="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddItemModal" >Add Item </button> </li>
               </ul>
             </div>
           ) : null}
@@ -636,162 +591,7 @@ export default function Index() {
 
           {loggedInAdmin ? (
             <>
-              <div
-                className="modal fade"
-                id="AdminPanelModalToggle"
-                aria-hidden="true"
-                aria-labelledby="AdminPanelModalToggleLabel"
-                tabIndex="-1"
-                data-bs-backdrop="false"
-              >
-                <div
-                  className="modal-dialog modal-dialog-centered modal-lg"
-                  data-bs-backdrop="false"
-                >
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h1
-                        className="modal-title fs-5"
-                        id="AdminPanelModalToggleLabel"
-                      >
-                        All Users
-                      </h1>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div className="modal-body">
-                      {users.map((user) => (
-                        <div
-                          key={user._id}
-                          className="d-flex justify-content-between align-items-center mb-2 border p-2"
-                        >
-                          <span>{user.username}</span>
-                          <div>
-                            <button
-                              className="btn btn-sm me-2"
-                              data-bs-toggle="modal"
-                              data-bs-target="#editUserModal"
-                              onClick={() => setSelectedUser(user)}
-                            >
-                              Edit
-                            </button>
-                            <button
-                              className="btn btn-sm"
-                              onClick={async () => {
-                                if (window.confirm("Delete user?")) {
-                                  await axios.delete(
-                                    `https://viss-server.vercel.app/user-delete/${user._id}`
-                                  );
-                                  setUsers(
-                                    users.filter((u) => u._id !== user._id)
-                                  );
-                                }
-                              }}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              <div
-                className="modal fade"
-                id="editUserModal"
-                aria-hidden="true"
-                aria-labelledby="editUserModalLabel"
-                tabIndex="-1"
-                data-bs-backdrop="false"
-              >
-                <div className="modal-dialog modal-dialog-centered modal-lg">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h1 className="modal-title fs-5" id="editUserModalLabel">
-                        Edit User
-                      </h1>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div className="modal-body">
-                      <div className="mb-3">
-                        <label className="form-label">Username</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={editUsername}
-                          onChange={(e) => setEditUsername(e.target.value)}
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">Password</label>
-                        <input
-                          type="password"
-                          className="form-control"
-                          value={editPassword}
-                          onChange={(e) => setEditPassword(e.target.value)}
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">Categories</label>
-                        {categories.map((cat) => (
-                          <div key={cat._id} className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id={`edit-cat-${cat._id}`}
-                              value={cat._id}
-                              checked={editCategory.includes(cat._id)}
-                              onChange={(e) => {
-                                if (e.target.checked) {
-                                  setEditCategory([...editCategory, cat._id]);
-                                } else {
-                                  setEditCategory(
-                                    editCategory.filter((id) => id !== cat._id)
-                                  );
-                                }
-                              }}
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor={`edit-cat-${cat._id}`}
-                            >
-                              {cat.name}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-
-                      <button
-                        className="btn btn-success"
-                        onClick={async () => {
-                          await axios.put(
-                            `https://viss-server.vercel.app/user-update/${selectedUser._id}`,
-                            {
-                              username: editUsername,
-                              password: editPassword,
-                              category: editCategory,
-                            }
-                          );
-                          alert("User updated!");
-                        }}
-                      >
-                        Update
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
               <button
                 className="loggedIn"
@@ -818,39 +618,189 @@ export default function Index() {
 
           {loggedInAdmin ? (
             <div class="dropdown">
-              <button
-                class="btn btn-sm dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Register
-              </button>
+              <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" > Register </button>
               <ul class="dropdown-menu">
-                <li
-                  data-bs-target="#RegisterModal"
-                  data-bs-toggle="modal"
-                  W
-                  data-bs-dismiss="modal"
-                  className="dropdown-item"
-                >
-                  Admin
-                </li>
-                <li
-                  type="button"
-                  data-bs-target="#UserLoginModalToggle2"
-                  data-bs-toggle="modal"
-                  className="dropdown-item"
-                >
-
-                  User
-                </li>
+                <li data-bs-target="#RegisterModal" data-bs-toggle="modal" data-bs-dismiss="modal" className="dropdown-item" > Admin </li>
+                <li type="button" data-bs-target="#UserLoginModalToggle2" data-bs-toggle="modal" className="dropdown-item" > User </li>
               </ul>
             </div>
           ) : null}
+
           <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#AboutModal">
             About
           </button>
+
+          <select
+            value={theme}
+            onChange={handleChange}
+            className="btn btn-sm btn-dark"
+          >
+            {themes.map((th) => (
+              <option key={th} value={th}>
+                {th.charAt(0).toUpperCase() + th.slice(1)} Theme
+              </option>
+            ))}
+          </select>
+
+          {/* Users Info Modal */}
+          <div
+            className="modal fade"
+            id="AdminPanelModalToggle"
+            aria-hidden="true"
+            aria-labelledby="AdminPanelModalToggleLabel"
+            tabIndex="-1"
+            data-bs-backdrop="false"
+          >
+            <div
+              className="modal-dialog modal-dialog-centered modal-lg"
+              data-bs-backdrop="false"
+            >
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1
+                    className="modal-title fs-5"
+                    id="AdminPanelModalToggleLabel"
+                  >
+                    All Users
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  {users.map((user) => (
+                    <div
+                      key={user._id}
+                      className="d-flex justify-content-between align-items-center mb-2 border p-2"
+                    >
+                      <span>{user.username}</span>
+                      <div>
+                        <button
+                          className="btn btn-sm me-2"
+                          data-bs-toggle="modal"
+                          data-bs-target="#editUserModal"
+                          onClick={() => setSelectedUser(user)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-sm"
+                          onClick={async () => {
+                            if (window.confirm("Delete user?")) {
+                              await axios.delete(
+                                `https://viss-server.vercel.app/user-delete/${user._id}`
+                              );
+                              setUsers(
+                                users.filter((u) => u._id !== user._id)
+                              );
+                            }
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="modal fade"
+            id="editUserModal"
+            aria-hidden="true"
+            aria-labelledby="editUserModalLabel"
+            tabIndex="-1"
+            data-bs-backdrop="false"
+          >
+            <div className="modal-dialog modal-dialog-centered modal-lg">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="editUserModalLabel">
+                    Edit User
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <div className="mb-3">
+                    <label className="form-label">Username</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={editUsername}
+                      onChange={(e) => setEditUsername(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Password</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      value={editPassword}
+                      onChange={(e) => setEditPassword(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Categories</label>
+                    {categories.map((cat) => (
+                      <div key={cat._id} className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id={`edit-cat-${cat._id}`}
+                          value={cat._id}
+                          checked={editCategory.includes(cat._id)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setEditCategory([...editCategory, cat._id]);
+                            } else {
+                              setEditCategory(
+                                editCategory.filter((id) => id !== cat._id)
+                              );
+                            }
+                          }}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={`edit-cat-${cat._id}`}
+                        >
+                          {cat.name}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button
+                    className="btn btn-success"
+                    onClick={async () => {
+                      await axios.put(
+                        `https://viss-server.vercel.app/user-update/${selectedUser._id}`,
+                        {
+                          username: editUsername,
+                          password: editPassword,
+                          category: editCategory,
+                        }
+                      );
+                      alert("User updated!");
+                    }}
+                  >
+                    Update
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
           <div
             className="modal fade"
             id="AboutModal"
@@ -922,17 +872,7 @@ export default function Index() {
             </div>
           </div>
 
-          <select
-            value={theme}
-            onChange={handleChange}
-            className="btn btn-sm btn-dark"
-          >
-            {themes.map((th) => (
-              <option key={th} value={th}>
-                {th.charAt(0).toUpperCase() + th.slice(1)} Theme
-              </option>
-            ))}
-          </select>
+
 
           {/* Admin Login Modal */}
           <div
@@ -1408,21 +1348,52 @@ export default function Index() {
           .sort((a, b) => a.sNo - b.sNo)
           .map((cat) => (
             <div key={cat._id} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              <div className="category d-inline-flex align-items-center gap-1">
-                <button className={`btn btn-sm ${filterType === cat._id ? "active" : ""}`} onClick={() => handleFilterClick(cat._id)} > {cat.name} </button>
-                <div class={`dropdown btn btn-sm  ${filterType === cat._id ? "active" : ""}`}>
-                  <button class={`btn btn-sm  ${filterType === cat._id ? "active" : ""}`} style={{ padding:'3px'}} type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-caret-down"></i></button>
-                  <ul class="dropdown-menu">
-                    {
-                      subCategories.filter((sub) => sub.category === cat._id)
-                        .sort((a, b) => a.sNo - b.sNo).map((element) => {
-                          return (
-                            <a href={`#sub-${element._id}`}className="dropdown-item">{element.name}</a>
-                          )
-                        })
-                    }
-                  </ul>
-                </div>
+              <div className="category position-relative">
+                {/* Main category name button */}
+                <button
+                  className={`btn btn-sm ${filterType === cat._id ? "active" : ""}`}
+                  onClick={() => handleFilterClick(cat._id)}
+                >
+                  {cat.name}
+                </button>
+
+                {/* Toggle button to show subcategories */}
+                <button
+                  className={`btn btn-sm ${filterType === cat._id ? "active" : ""}`}
+                  style={{ padding: '3px' }}
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target={`#collapse-${cat._id}`}
+                  aria-expanded="false"
+                  aria-controls={`collapse-${cat._id}`}
+                >
+                  <i className="fa-solid fa-caret-down"></i>
+                </button>
+
+                {/* Subcategory collapsible menu */}
+
+              </div>
+              <div
+                className="collapse position-absolute z-3 mt-5"
+                id={`collapse-${cat._id}`}
+                style={{ minWidth: "150px" }}
+              >
+                <ul className="list-group list-group-flush shadow rounded overflow-hidden">
+                  {subCategories
+                    .filter((sub) => sub.category === cat._id)
+                    .sort((a, b) => a.sNo - b.sNo)
+                    .map((element) => (
+                      <li
+                        key={element._id}
+                        className="list-group-item py-1 px-2 dropDown-item"
+                        style={{ cursor: "pointer" }}
+                      >
+                        <a href={`#sub-${element._id}`} style={{color:'black'}} className="text-decoration-none">
+                          {element.name}
+                        </a>
+                      </li>
+                    ))}
+                </ul>
               </div>
               {
                 loggedInAdmin && ActivateEditMode ? (
@@ -1604,6 +1575,8 @@ export default function Index() {
                                   iconUrl: item.iconUrl,
                                   link: item.link,
                                   document: item.document,
+                                  category: item.category,
+                                  subCategory: item.subCategory
                                 });
                               }}
                             >
@@ -1640,13 +1613,7 @@ export default function Index() {
                     );
                   })}
 
-                <div
-                  className="modal fade"
-                  id="ItemEditModal"
-                  tabIndex="-1"
-                  aria-hidden="true"
-                  data-bs-backdrop='false'
-                >
+                <div className="modal fade" id="ItemEditModal" tabIndex="-1" aria-hidden="true" data-bs-backdrop='false' >
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -1705,6 +1672,51 @@ export default function Index() {
                             Is Document
                           </label>
                         </div>
+                        {/* Category dropdown */}
+                        <select
+                          name="category"
+                          value={editForm.category}
+                          onChange={(e) =>
+                            setEditForm({
+                              ...editForm,
+                              category: e.target.value,
+                              subCategory: "", // reset subCategory when category changes
+                            })
+                          }
+                          className="form-select mb-2"
+                        >
+                          <option value="">Select Category</option>
+                          {categories.map((cat) => (
+                            <option key={cat._id} value={cat._id}>
+                              {cat.name}
+                            </option>
+                          ))}
+                        </select>
+
+                        {/* SubCategory dropdown */}
+                        <select
+                          name="subCategory"
+                          value={editForm.subCategory}
+                          onChange={(e) =>
+                            setEditForm({
+                              ...editForm,
+                              subCategory: e.target.value,
+                            })
+                          }
+                          className="form-select mb-2"
+                          disabled={!editForm.category}
+                        >
+                          <option value="">Select SubCategory</option>
+                          {subCategories
+                            .filter((sub) => sub.category === editForm.category)
+                            .map((sub) => (
+                              <option key={sub._id} value={sub._id}>
+                                {sub.name}
+                              </option>
+                            ))}
+                        </select>
+
+
                       </div>
                       <div className="modal-footer">
                         <button
@@ -1723,8 +1735,6 @@ export default function Index() {
                                 `https://viss-server.vercel.app/update-item/${selectedItem._id}`,
                                 {
                                   ...editForm,
-                                  category: selectedItem.category,
-                                  subCategory: selectedItem.subCategory,
                                 }
                               );
                               if (res.status === 200) {
