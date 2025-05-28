@@ -362,7 +362,7 @@ export default function Index() {
           >
             {themes.map((th) => (
               <option key={th} value={th}>
-                {th.charAt(0).toUpperCase() + th.slice(1)} Theme
+                {th.charAt(0).toUpperCase() + th.slice(1)}
               </option>
             ))}
           </select>
