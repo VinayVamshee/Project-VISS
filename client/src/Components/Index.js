@@ -348,6 +348,125 @@ export default function Index() {
 
   return (
     <div className="index">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <form className="ms-2" autoComplete="off"><input type="text" placeholder="Search" name="searchText" autoComplete="new-password" value={searchText} onChange={(e) => setSearchText(e.target.value)} className="form-control" />  </form>
+          <select
+            value={theme}
+            onChange={handleChange}
+            className="btn" 
+          >
+            {themes.map((th) => (
+              <option key={th} value={th}>
+                {th.charAt(0).toUpperCase() + th.slice(1)} Theme
+              </option>
+            ))}
+          </select>
+          <a class="navbar-brand ms-2" href="/">VISS</a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {loggedInUser && !loggedInAdmin ? (
+                <li className="nav-item">
+                  <div className="">{loggedInUser.username}</div>
+                  <button className="" onClick={userLogout}>
+                    User Logout
+                  </button>
+                </li>
+              ) : !loggedInAdmin ? (
+                <li
+                  className="nav-item"
+                  data-bs-target="#UserLoginModalToggle"
+                  data-bs-toggle="modal"
+                >
+                  User Login
+                </li>
+              ) : null}
+
+
+              {loggedInAdmin ? (
+                <li className="nav-item" style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                  <button
+                    className=" btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#AdminPanelModalToggle"
+                    style={{ width: 'fit-content' }}
+                  >
+
+                    {loggedInAdmin.username}
+                  </button>
+
+                  <button className="btn" style={{ width: 'fit-content' }} onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              ) : (
+                <button
+                  className="btn"
+                  data-bs-target="#AdminModalToggle"
+                  data-bs-toggle="modal"
+                >
+                  <i className="fa-solid fa-user-tie fa-lg me-2"></i>Admin Login
+                </button>
+              )}
+
+
+
+              {loggedInAdmin ? (
+                <div class="dropdown">
+                  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" > Register </button>
+                  <ul class="dropdown-menu">
+                    <li data-bs-target="#RegisterModal" data-bs-toggle="modal" data-bs-dismiss="modal" className="dropdown-item" > Admin </li>
+                    <li type="button" data-bs-target="#UserLoginModalToggle2" data-bs-toggle="modal" className="dropdown-item" > User </li>
+                  </ul>
+                </div>
+              ) : null}
+
+              <button type="button" class="btn" style={{ width: 'fit-content' }} data-bs-toggle="modal" data-bs-target="#AboutModal">
+                About
+              </button>
+
+
+              {
+                loggedInAdmin ?
+                  <>
+                    <button className="btn nav-item" style={{ width: 'fit-content' }} class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Modify
+                    </button>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <div className="form-check ms-3">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="editModeToggle"
+                            onChange={(e) => setActivateEditMode(e.target.checked)}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="editModeToggle"
+                          >
+                            Edit Mode
+                          </label>
+                        </div>
+                      </li>
+                      <li> <button className="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddCategoryModal" >Add Category </button> </li>
+                      <li> <button className="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddSubCategoryModal" > Add SubCategory </button> </li>
+                      <li> <button className="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddItemModal" >Add Item </button> </li>
+                    </ul>
+                  </>
+                  :
+                  null
+              }
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
       <div className="navigation">
         <Link to='/' className="logo">VISS</Link>
         <form autoComplete="off"><input type="text" placeholder="Search" name="searchText" autoComplete="new-password" value={searchText} onChange={(e) => setSearchText(e.target.value)} className="form-control" />  </form>
