@@ -1373,28 +1373,7 @@ export default function Index() {
                 {/* Subcategory collapsible menu */}
 
               </div>
-              <div
-                className="collapse position-absolute z-3 mt-5"
-                id={`collapse-${cat._id}`}
-                style={{ minWidth: "150px" }}
-              >
-                <ul className="list-group list-group-flush shadow rounded overflow-hidden">
-                  {subCategories
-                    .filter((sub) => sub.category === cat._id)
-                    .sort((a, b) => a.sNo - b.sNo)
-                    .map((element) => (
-                      <li
-                        key={element._id}
-                        className="list-group-item py-1 px-2 dropDown-item"
-                        style={{ cursor: "pointer" }}
-                      >
-                        <a href={`#sub-${element._id}`} style={{color:'black'}} className="text-decoration-none">
-                          {element.name}
-                        </a>
-                      </li>
-                    ))}
-                </ul>
-              </div>
+
               {
                 loggedInAdmin && ActivateEditMode ? (
                   <div style={{ display: 'flex', gap: '10px' }}>
@@ -1447,6 +1426,34 @@ export default function Index() {
             </div>
           ))}
       </div>
+
+      {
+        categories.sort((a, b) => a.sNo - b.sNo)
+          .map((cat) => {
+            return (
+              <div
+                className="collapse"
+                id={`collapse-${cat._id}`}
+                style={{ width: "95%" }}
+              >
+                <ul className="list-group list-group-flush shadow rounded overflow-hidden">
+                  {subCategories
+                    .filter((sub) => sub.category === cat._id)
+                    .sort((a, b) => a.sNo - b.sNo)
+                    .map((element) => (
+                      <a href={`#sub-${element._id}`}
+                        key={element._id}
+                        className="list-group-item py-1 px-2 dropDown-item"
+                        style={{ cursor: "pointer" }}
+                      >
+                        {element.name}
+                      </a>
+                    ))}
+                </ul>
+              </div>
+            )
+          })
+      }
 
       {/* {searchText.trim() !== '' && (
         <div className="search-results my-3">
