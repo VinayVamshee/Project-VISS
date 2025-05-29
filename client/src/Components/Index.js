@@ -26,20 +26,36 @@ export default function Index() {
   });
 
   const themes = [
-    "light",
-    "forest",
-    "ocean",
-    "skyshine",
-    "sunshine",
-    "wood",
-    "lavender",
-    "rose",
-    "mint",
-    "coral",
-    "slate",
-    "grape",
-    "mocha",
-  ];
+  "light",
+  "forest",
+  "ocean",
+  "skyshine",
+  "sunshine",
+  "wood",
+  "lavender",
+  "rose",
+  "mint",
+  "coral",
+  "slate",
+  "grape",
+  "mocha",
+  "nebula",
+  "andromeda",
+  "supernova",
+  "ocean-depths",
+  "aurora",
+  "cotton-candy",
+  "midnight-mirage",
+  "obsidian-core",
+  "neon-matrix",
+  "starforge-steel",
+  "deep-ember",
+  "cyber-blue-noir",
+   "tropical-punch",
+  "electric-dream",
+  "rainbow-cascade",
+  "jungle-fruit"
+];
   const [theme, setTheme] = useState("light");
 
   // On mount, load saved theme or default to light
