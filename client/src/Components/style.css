@@ -1085,7 +1085,7 @@ select.btn {
 }
 
 .item-name {
-    color: var(--navigation-btn-text);
+    color: var(--category-btn-text);
     transition: 0.3s ease-in-out;
 }
 
