@@ -25,37 +25,38 @@ export default function Index() {
     password: "",
   });
 
-  const themes = [
-  "light",
-  "forest",
-  "ocean",
-  "skyshine",
-  "sunshine",
-  "wood",
-  "lavender",
-  "rose",
-  "mint",
-  "coral",
-  "slate",
-  "grape",
-  "mocha",
-  "nebula",
-  "andromeda",
-  "supernova",
-  "ocean-depths",
-  "aurora",
-  "cotton-candy",
-  "midnight-mirage",
-  "obsidian-core",
-  "neon-matrix",
-  "starforge-steel",
-  "deep-ember",
-  "cyber-blue-noir",
-   "tropical-punch",
-  "electric-dream",
-  "rainbow-cascade",
-  "jungle-fruit"
+const themes = [
+  { name: "☀️ light", value: "light" },
+  { name: "🌲 forest", value: "forest" },
+  { name: "🌊 ocean", value: "ocean" },
+  { name: "✨ skyshine", value: "skyshine" },
+  { name: "🌞 sunshine", value: "sunshine" },
+  { name: "🪵 wood", value: "wood" },
+  { name: "💜 lavender", value: "lavender" },
+  { name: "🌹 rose", value: "rose" },
+  { name: "🌿 mint", value: "mint" },
+  { name: "🪸 coral", value: "coral" },
+  { name: "🪨 slate", value: "slate" },
+  { name: "🍇 grape", value: "grape" },
+  { name: "☕ mocha", value: "mocha" },
+  { name: "🌌 nebula", value: "nebula" },
+  { name: "🪐 andromeda", value: "andromeda" },
+  { name: "💥 supernova", value: "supernova" },
+  { name: "🐠 ocean-depths", value: "ocean-depths" },
+  { name: "🌈 aurora", value: "aurora" },
+  { name: "🍬 cotton-candy", value: "cotton-candy" },
+  { name: "🌙 midnight-mirage", value: "midnight-mirage" },
+  { name: "⚫ obsidian-core", value: "obsidian-core" },
+  { name: "🟩 neon-matrix", value: "neon-matrix" },
+  { name: "⚙️ starforge-steel", value: "starforge-steel" },
+  { name: "🔥 deep-ember", value: "deep-ember" },
+  { name: "🌀 cyber-blue-noir", value: "cyber-blue-noir" },
+  { name: "🍍 tropical-punch", value: "tropical-punch" },
+  { name: "⚡ electric-dream", value: "electric-dream" },
+  { name: "🌈 rainbow-cascade", value: "rainbow-cascade" },
+  { name: "🍉 jungle-fruit", value: "jungle-fruit" }
 ];
+
   const [theme, setTheme] = useState("light");
 
   // On mount, load saved theme or default to light
@@ -364,10 +365,10 @@ export default function Index() {
 
   return (
     <div className="index">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+      <nav className="navbar navbar-expand-lg">
+        <div className="container-fluid">
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
           </button>
 
           <form className="ms-2" autoComplete="off"><input type="text" placeholder="Search" name="searchText" autoComplete="new-password" value={searchText} onChange={(e) => setSearchText(e.target.value)} className="form-control" />  </form>
@@ -376,15 +377,15 @@ export default function Index() {
             onChange={handleChange}
             className="btn" 
           >
-            {themes.map((th) => (
-              <option key={th} value={th}>
-                {th.charAt(0).toUpperCase() + th.slice(1)}
+             {themes.map((th) => (
+              <option key={th.value} value={th.value}>
+                {th.name.charAt(0).toUpperCase() + th.name.slice(1)}
               </option>
             ))}
           </select>
-          <a class="navbar-brand ms-2" href="/">VISS</a>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <a className="navbar-brand ms-2" href="/">VISS</a>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {loggedInUser && !loggedInAdmin ? (
                 <li className="nav-item">
                   <div className="">{loggedInUser.username}</div>
@@ -432,16 +433,16 @@ export default function Index() {
 
 
               {loggedInAdmin ? (
-                <div class="dropdown">
-                  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" > Register </button>
-                  <ul class="dropdown-menu">
+                <div className="dropdown">
+                  <button className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" > Register </button>
+                  <ul className="dropdown-menu">
                     <li data-bs-target="#RegisterModal" data-bs-toggle="modal" data-bs-dismiss="modal" className="dropdown-item" > Admin </li>
                     <li type="button" data-bs-target="#UserLoginModalToggle2" data-bs-toggle="modal" className="dropdown-item" > User </li>
                   </ul>
                 </div>
               ) : null}
 
-              <button type="button" class="btn" style={{ width: 'fit-content' }} data-bs-toggle="modal" data-bs-target="#AboutModal">
+              <button type="button" className="btn" style={{ width: 'fit-content' }} data-bs-toggle="modal" data-bs-target="#AboutModal">
                 About
               </button>
 
@@ -449,7 +450,7 @@ export default function Index() {
               {
                 loggedInAdmin ?
                   <>
-                    <button className="btn nav-item" style={{ width: 'fit-content' }} class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button style={{ width: 'fit-content' }} className="btn nav-item nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       Modify
                     </button>
                     <ul className="dropdown-menu">
@@ -752,16 +753,16 @@ export default function Index() {
           )}
 
           {loggedInAdmin ? (
-            <div class="dropdown">
-              <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" > Register </button>
-              <ul class="dropdown-menu">
+            <div className="dropdown">
+              <button className="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" > Register </button>
+              <ul className="dropdown-menu">
                 <li data-bs-target="#RegisterModal" data-bs-toggle="modal" data-bs-dismiss="modal" className="dropdown-item" > Admin </li>
                 <li type="button" data-bs-target="#UserLoginModalToggle2" data-bs-toggle="modal" className="dropdown-item" > User </li>
               </ul>
             </div>
           ) : null}
 
-          <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#AboutModal">
+          <button type="button" className="btn btn-sm" data-bs-toggle="modal" data-bs-target="#AboutModal">
             About
           </button>
 
@@ -770,9 +771,9 @@ export default function Index() {
             onChange={handleChange}
             className="btn btn-sm btn-dark"
           >
-            {themes.map((th) => (
-              <option key={th} value={th}>
-                {th.charAt(0).toUpperCase() + th.slice(1)} Theme
+           {themes.map((th) => (
+              <option key={th.value} value={th.value}>
+                {th.name.charAt(0).toUpperCase() + th.name.slice(1)}
               </option>
             ))}
           </select>
