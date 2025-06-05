@@ -1070,7 +1070,8 @@ select.btn {
 
 .item {
     background-color: var(--item-bg);
-    color: var(--sub-categories-text-bg);
+    color: blue;
+    font-weight: bold;
     transition: background-color 0.3s ease;
     text-decoration: none;
     padding: 5px;
@@ -1094,6 +1095,10 @@ select.btn {
     background-color: var(--item-hover-bg);
     filter: drop-shadow(3px 3px 7px rgba(0, 0, 0, 0.393));
     transform: scale(1.08);
+}
+
+.item:hover .item-name {
+    color: black;
 }
 
 .item img {
