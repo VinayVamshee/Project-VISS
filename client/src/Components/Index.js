@@ -25,37 +25,37 @@ export default function Index() {
     password: "",
   });
 
-const themes = [
-  { name: "☀️ light", value: "light" },
-  { name: "🌲 forest", value: "forest" },
-  { name: "🌊 ocean", value: "ocean" },
-  { name: "✨ skyshine", value: "skyshine" },
-  { name: "🌞 sunshine", value: "sunshine" },
-  { name: "🪵 wood", value: "wood" },
-  { name: "💜 lavender", value: "lavender" },
-  { name: "🌹 rose", value: "rose" },
-  { name: "🌿 mint", value: "mint" },
-  { name: "🪸 coral", value: "coral" },
-  { name: "🪨 slate", value: "slate" },
-  { name: "🍇 grape", value: "grape" },
-  { name: "☕ mocha", value: "mocha" },
-  { name: "🌌 nebula", value: "nebula" },
-  { name: "🪐 andromeda", value: "andromeda" },
-  { name: "💥 supernova", value: "supernova" },
-  { name: "🐠 ocean-depths", value: "ocean-depths" },
-  { name: "🌈 aurora", value: "aurora" },
-  { name: "🍬 cotton-candy", value: "cotton-candy" },
-  { name: "🌙 midnight-mirage", value: "midnight-mirage" },
-  { name: "⚫ obsidian-core", value: "obsidian-core" },
-  { name: "🟩 neon-matrix", value: "neon-matrix" },
-  { name: "⚙️ starforge-steel", value: "starforge-steel" },
-  { name: "🔥 deep-ember", value: "deep-ember" },
-  { name: "🌀 cyber-blue-noir", value: "cyber-blue-noir" },
-  { name: "🍍 tropical-punch", value: "tropical-punch" },
-  { name: "⚡ electric-dream", value: "electric-dream" },
-  { name: "🌈 rainbow-cascade", value: "rainbow-cascade" },
-  { name: "🍉 jungle-fruit", value: "jungle-fruit" }
-];
+  const themes = [
+    { name: "☀️ light", value: "light" },
+    { name: "🌲 forest", value: "forest" },
+    { name: "🌊 ocean", value: "ocean" },
+    { name: "✨ skyshine", value: "skyshine" },
+    { name: "🌞 sunshine", value: "sunshine" },
+    { name: "🪵 wood", value: "wood" },
+    { name: "💜 lavender", value: "lavender" },
+    { name: "🌹 rose", value: "rose" },
+    { name: "🌿 mint", value: "mint" },
+    { name: "🪸 coral", value: "coral" },
+    { name: "🪨 slate", value: "slate" },
+    { name: "🍇 grape", value: "grape" },
+    { name: "☕ mocha", value: "mocha" },
+    { name: "🌌 nebula", value: "nebula" },
+    { name: "🪐 andromeda", value: "andromeda" },
+    { name: "💥 supernova", value: "supernova" },
+    { name: "🐠 ocean-depths", value: "ocean-depths" },
+    { name: "🌈 aurora", value: "aurora" },
+    { name: "🍬 cotton-candy", value: "cotton-candy" },
+    { name: "🌙 midnight-mirage", value: "midnight-mirage" },
+    { name: "⚫ obsidian-core", value: "obsidian-core" },
+    { name: "🟩 neon-matrix", value: "neon-matrix" },
+    { name: "⚙️ starforge-steel", value: "starforge-steel" },
+    { name: "🔥 deep-ember", value: "deep-ember" },
+    { name: "🌀 cyber-blue-noir", value: "cyber-blue-noir" },
+    { name: "🍍 tropical-punch", value: "tropical-punch" },
+    { name: "⚡ electric-dream", value: "electric-dream" },
+    { name: "🌈 rainbow-cascade", value: "rainbow-cascade" },
+    { name: "🍉 jungle-fruit", value: "jungle-fruit" }
+  ];
 
   const [theme, setTheme] = useState("light");
 
@@ -375,9 +375,9 @@ const themes = [
           <select
             value={theme}
             onChange={handleChange}
-            className="btn" 
+            className="btn"
           >
-             {themes.map((th) => (
+            {themes.map((th) => (
               <option key={th.value} value={th.value}>
                 {th.name.charAt(0).toUpperCase() + th.name.slice(1)}
               </option>
@@ -771,7 +771,7 @@ const themes = [
             onChange={handleChange}
             className="btn btn-sm btn-dark"
           >
-           {themes.map((th) => (
+            {themes.map((th) => (
               <option key={th.value} value={th.value}>
                 {th.name.charAt(0).toUpperCase() + th.name.slice(1)}
               </option>
