@@ -8,17 +8,10 @@ const AdminUser = require('./Models/AdminUser')
 const Category = require('./Models/CategorySchema');
 const SubCategory = require('./Models/SubCategory');
 const Item = require('./Models/Items');
-const User = require('./Models/User')
+const User = require('./Models/User');
+const connectDB = require('./connectDb');
 
-
-
-const uri = process.env.MONGODB_URL;
 const JWT_SECRET = process.env.JWT_SECRET;
-
-const connectDB = () => {
-    console.log("DataBase Connected");
-    return mongoose.connect(uri);
-};
 
 const app = express();
 app.use(cors());

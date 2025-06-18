@@ -11,6 +11,15 @@ export default function Home() {
     const [userLoginData, setUserLoginData] = useState({ name: '', password: '' });
     const navigate = useNavigate();
 
+    // eslint-disable-next-line 
+    const [theme, setTheme] = useState("light");
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        setTheme(savedTheme);
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    }, []);
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         const adminData = localStorage.getItem("admin");
@@ -37,7 +46,7 @@ export default function Home() {
 
     const handleAdminLogin = async () => {
         try {
-            const res = await axios.post("http://localhost:3001/admin-login", {
+            const res = await axios.post("https://viss-server.vercel.app/admin-login", {
                 username: loginForm.username,
                 password: loginForm.password,
             });
@@ -59,7 +68,7 @@ export default function Home() {
 
     const handleUserLogin = async () => {
         try {
-            const res = await axios.post("http://localhost:3001/user-login", {
+            const res = await axios.post("https://viss-server.vercel.app/user-login", {
                 username: userLoginData.name,
                 password: userLoginData.password,
             });
@@ -173,7 +182,7 @@ export default function Home() {
             )}
 
             {/* Explore More */}
-            <div className="explore-more">
+            {/* <div className="explore-more">
                 <p style={{ fontSize: '2rem', color: 'black' }}> Explore More Applications Here...</p>
                 <div className="websites">
                     <a href="https://vigilance-secr.vercel.app/" target="_blank" rel="noreferrer" className="website">
@@ -185,7 +194,7 @@ export default function Home() {
                         <div>VSS</div>
                     </a>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }
