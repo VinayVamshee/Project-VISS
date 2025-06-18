@@ -9,7 +9,7 @@ const Category = require('./Models/CategorySchema');
 const SubCategory = require('./Models/SubCategory');
 const Item = require('./Models/Items');
 const User = require('./Models/User');
-const connectDB = require('./connectDb');
+const connectDB = require('./connectDB');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
